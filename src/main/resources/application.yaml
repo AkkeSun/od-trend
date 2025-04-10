@@ -1,1 +1,19 @@
-spring.application.name=od-trend
+spring:
+  application:
+    name: od-trend
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    url: jdbc:mysql://140.245.70.130:3306/trend?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: akkessun
+    password: sunyang2ek+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8090
+  shutdown: graceful
