@@ -43,7 +43,7 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
 
         try {
             String crawlingResult = shopClientPort.getProducts(crawlingPage);
-            crawlingLogStoragePort.saveAll(CrawlingLog.builder()
+            crawlingLogStoragePort.save(CrawlingLog.builder()
                 .transactionId(transactionId)
                 .crawlingPageId(crawlingPage.id())
                 .crawlingData(gzipUtil.compress(crawlingResult))

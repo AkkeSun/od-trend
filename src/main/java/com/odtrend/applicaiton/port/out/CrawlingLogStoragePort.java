@@ -4,5 +4,5 @@ import com.odtrend.domain.model.CrawlingLog;
 
 public interface CrawlingLogStoragePort {
 
-    void saveAll(CrawlingLog crawlingLog);
+    void save(CrawlingLog crawlingLog);
 }

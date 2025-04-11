@@ -43,6 +43,7 @@ class CrawlingPageMapper {
                         .headerValue(persistence.getHeaderValue())
                         .build())
                     .toList())
+            .useYn(entity.getUseYn())
             .build();
     }
 }

@@ -9,6 +9,7 @@ class CrawlingProductMapper {
     public CrawlingProductEntity toEntity(CrawlingProduct crawlingProduct) {
         return CrawlingProductEntity.builder()
             .id(crawlingProduct.getId())
+            .transactionId(crawlingProduct.getTransactionId())
             .shopCode(crawlingProduct.getShopCode())
             .productId(crawlingProduct.getProductId())
             .productName(crawlingProduct.getProductName())
@@ -24,6 +25,7 @@ class CrawlingProductMapper {
     public CrawlingProduct toDomain(CrawlingProductEntity crawlingProductEntity) {
         return CrawlingProduct.builder()
             .id(crawlingProductEntity.getId())
+            .transactionId(crawlingProductEntity.getTransactionId())
             .shopCode(crawlingProductEntity.getShopCode())
             .productId(crawlingProductEntity.getProductId())
             .productName(crawlingProductEntity.getProductName())

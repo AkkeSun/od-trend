@@ -14,7 +14,7 @@ class CrawlingLogPersistenceAdapter implements CrawlingLogStoragePort {
     private final CrawlingLogRepository crawlingLogRepository;
 
     @Override
-    public void saveAll(CrawlingLog crawlingLog) {
+    public void save(CrawlingLog crawlingLog) {
         CrawlingLogEntity crawlingLogEntity = crawlingLogMapper.toEntity(crawlingLog);
         crawlingLogRepository.save(crawlingLogEntity);
     }

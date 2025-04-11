@@ -1,6 +1,5 @@
 package com.odtrend.adapter.out.persistence.crawlingLog;
 
-import com.odtrend.domain.model.CrawlingLog;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,15 +40,5 @@ public class CrawlingLogEntity {
         this.transactionId = transactionId;
         this.crawlingData = crawlingData;
         this.regDateTime = regDateTime;
-    }
-
-    public CrawlingLogEntity of(CrawlingLog domain) {
-        return CrawlingLogEntity.builder()
-            .id(domain.id())
-            .crawlingPageId(domain.crawlingPageId())
-            .transactionId(domain.transactionId())
-            .crawlingData(domain.crawlingData())
-            .regDateTime(domain.regDateTime())
-            .build();
     }
 }
