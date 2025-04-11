@@ -22,7 +22,7 @@ class ProductNormaizerFactoryImpl implements ProductNormaizerFactory {
 
     @Override
     public ProductNormalizer getNormalizer(String shopCode) {
-        return Optional.of(factoryMap.get(shopCode))
+        return Optional.ofNullable(factoryMap.get(shopCode))
             .orElseThrow(() -> new CustomBusinessException(Product_Nomalizer_Factory_Error));
     }
 }

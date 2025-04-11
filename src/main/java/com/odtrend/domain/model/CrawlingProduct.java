@@ -19,13 +19,13 @@ public class CrawlingProduct {
     private String imgUrl;
     private String productUrl;
     private int price;
-    private String keyword;
+    private String description;
     private LocalDateTime regDateTime;
 
     @Builder
     public CrawlingProduct(Long id, String transactionId, String shopCode, Category category,
         String productId, String productName, String imgUrl, String productUrl, int price,
-        String keyword, LocalDateTime regDateTime) {
+        String description, LocalDateTime regDateTime) {
         this.id = id;
         this.transactionId = transactionId;
         this.shopCode = shopCode;
@@ -35,32 +35,16 @@ public class CrawlingProduct {
         this.imgUrl = imgUrl;
         this.productUrl = productUrl;
         this.price = price;
-        this.keyword = keyword;
+        this.description = description;
         this.regDateTime = regDateTime;
     }
 
-    public void updateKeyword(String keyword) {
-        this.keyword = keyword;
+    public void updateDescription(String keyword) {
+        this.description = description;
     }
-
 
     public boolean isValid() {
-        return !StringUtils.hasText(productId) || !StringUtils.hasText(productName) ||
-            !StringUtils.hasText(imgUrl) || !StringUtils.hasText(productUrl) || price > 0;
-    }
-
-    public void updateFieldSize() {
-        if (productId.length() > 30) {
-            productId = productId.substring(0, 30);
-        }
-        if (productName.length() > 100) {
-            productName = productName.substring(0, 100);
-        }
-        if (imgUrl.length() > 100) {
-            imgUrl = imgUrl.substring(0, 100);
-        }
-        if (productUrl.length() > 100) {
-            productUrl = productUrl.substring(0, 100);
-        }
+        return StringUtils.hasText(productId) && StringUtils.hasText(productName) &&
+            StringUtils.hasText(imgUrl) && StringUtils.hasText(productUrl) && price > 0;
     }
 }

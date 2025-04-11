@@ -28,7 +28,8 @@ public record ErrorLog(
     public static ErrorLog of(Exception e, String domain, String description) {
         return ErrorLog.builder()
             .errorCode(9999)
-            .errorMessage(e.getMessage().substring(0, 100))
+            .errorMessage(e.getMessage().length() > 100 ?
+                e.getMessage().substring(0, 100) : e.getMessage())
             .domain(domain)
             .description(description)
             .regDateTime(LocalDateTime.now())

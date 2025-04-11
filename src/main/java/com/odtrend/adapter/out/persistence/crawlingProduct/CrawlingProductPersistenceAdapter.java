@@ -15,10 +15,13 @@ class CrawlingProductPersistenceAdapter implements CrawlingProductStoragePort {
 
     @Override
     public void saveAll(List<CrawlingProduct> products) {
-        products.forEach(CrawlingProduct::updateFieldSize);
         crawlingProductRepository.saveAll(
             products.stream()
-                .map(mapper::toEntity)
+                .map(domain -> {
+                    CrawlingProductEntity entity = mapper.toEntity(domain);
+                    entity.updateFieldSize();
+                    return entity;
+                })
                 .toList()
         );
     }

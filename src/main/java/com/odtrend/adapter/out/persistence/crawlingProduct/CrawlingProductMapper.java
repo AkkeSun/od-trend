@@ -9,13 +9,14 @@ class CrawlingProductMapper {
     public CrawlingProductEntity toEntity(CrawlingProduct crawlingProduct) {
         return CrawlingProductEntity.builder()
             .id(crawlingProduct.getId())
+            .transactionId(crawlingProduct.getTransactionId())
             .shopCode(crawlingProduct.getShopCode())
             .productId(crawlingProduct.getProductId())
             .productName(crawlingProduct.getProductName())
             .price(crawlingProduct.getPrice())
             .imgUrl(crawlingProduct.getImgUrl())
             .productUrl(crawlingProduct.getProductUrl())
-            .keyword(crawlingProduct.getKeyword())
+            .description(crawlingProduct.getDescription())
             .category(crawlingProduct.getCategory())
             .regDateTime(crawlingProduct.getRegDateTime())
             .build();
@@ -24,13 +25,14 @@ class CrawlingProductMapper {
     public CrawlingProduct toDomain(CrawlingProductEntity crawlingProductEntity) {
         return CrawlingProduct.builder()
             .id(crawlingProductEntity.getId())
+            .transactionId(crawlingProductEntity.getTransactionId())
             .shopCode(crawlingProductEntity.getShopCode())
             .productId(crawlingProductEntity.getProductId())
             .productName(crawlingProductEntity.getProductName())
             .price(crawlingProductEntity.getPrice())
             .imgUrl(crawlingProductEntity.getImgUrl())
             .productUrl(crawlingProductEntity.getProductUrl())
-            .keyword(crawlingProductEntity.getKeyword())
+            .description(crawlingProductEntity.getDescription())
             .category(crawlingProductEntity.getCategory())
             .regDateTime(crawlingProductEntity.getRegDateTime())
             .build();

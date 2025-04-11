@@ -1,5 +1,7 @@
 package com.odtrend.applicaiton.service.register_product;
 
+import static com.odtrend.infrastructure.util.GzipUtil.compress;
+
 import com.odtrend.applicaiton.port.out.CrawlingLogStoragePort;
 import com.odtrend.applicaiton.port.out.CrawlingProductStoragePort;
 import com.odtrend.applicaiton.port.out.ErrorLogStoragePort;
@@ -10,7 +12,6 @@ import com.odtrend.domain.model.CrawlingProduct;
 import com.odtrend.domain.model.ErrorLog;
 import com.odtrend.domain.service.ProductNormaizerFactory;
 import com.odtrend.infrastructure.exception.CustomBusinessException;
-import com.odtrend.infrastructure.util.GzipUtil;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -24,8 +25,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 class RegisterProductAsyncWorker implements RegisterProductAsync {
-
-    private final GzipUtil gzipUtil;
 
     private final ShopClientPort shopClientPort;
 
@@ -43,10 +42,10 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
 
         try {
             String crawlingResult = shopClientPort.getProducts(crawlingPage);
-            crawlingLogStoragePort.saveAll(CrawlingLog.builder()
+            crawlingLogStoragePort.save(CrawlingLog.builder()
                 .transactionId(transactionId)
                 .crawlingPageId(crawlingPage.id())
-                .crawlingData(gzipUtil.compress(crawlingResult))
+                .crawlingData(compress(crawlingResult))
                 .regDateTime(LocalDateTime.now())
                 .build());
 
