@@ -39,9 +39,10 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
     @Override
     public void registerProduct(CrawlingPage crawlingPage) {
         String transactionId = UUID.randomUUID().toString();
-
+        log.info("register_product start - " + transactionId);
         try {
             String crawlingResult = shopClientPort.getProducts(crawlingPage);
+            log.info("register_product crawling success ");
             crawlingLogStoragePort.save(CrawlingLog.builder()
                 .transactionId(transactionId)
                 .crawlingPageId(crawlingPage.id())
@@ -54,10 +55,6 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
 
             products.removeIf(product -> crawlingProductStoragePort.existsByShopCodeAndProductId(
                 product.getShopCode(), product.getProductId()));
-
-            for (CrawlingProduct product : products) {
-                // TODO: LLM Keyword command
-            }
 
             crawlingProductStoragePort.saveAll(products);
 

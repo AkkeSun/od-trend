@@ -2,12 +2,14 @@ package com.odtrend.domain.service;
 
 import static com.odtrend.domain.model.ShopInfo.NAVER;
 import static com.odtrend.infrastructure.util.JsonUtil.toJsonNode;
+import static com.odtrend.infrastructure.util.KeywordUtil.getKeywords;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.odtrend.domain.model.CrawlingPage;
 import com.odtrend.domain.model.CrawlingProduct;
 import com.odtrend.infrastructure.exception.CustomBusinessException;
 import com.odtrend.infrastructure.exception.ErrorCode;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +41,9 @@ public class NaverProductNormalizer implements ProductNormalizer {
                     .imgUrl(productJson.get("imageUrl").asText())
                     .productUrl(productJson.get("linkUrl").asText())
                     .price(productJson.get("priceValue").asInt())
+                    .keyword(getKeywords(productJson.get("title").asText()).toString())
+                    .regDateTime(LocalDateTime.now())
                     .build();
-
                 if (product.isValid()) {
                     products.add(product);
                 }
@@ -49,7 +52,6 @@ public class NaverProductNormalizer implements ProductNormalizer {
             if (products.isEmpty()) {
                 throw new CustomBusinessException(ErrorCode.Product_Nomalizer_Error);
             }
-
             return products;
         } catch (Exception e) {
             log.error("NaverProductNormalizer error: {}", e.getMessage());
