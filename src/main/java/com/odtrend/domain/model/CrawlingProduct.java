@@ -19,13 +19,13 @@ public class CrawlingProduct {
     private String imgUrl;
     private String productUrl;
     private int price;
-    private String description;
+    private String keyword;
     private LocalDateTime regDateTime;
 
     @Builder
     public CrawlingProduct(Long id, String transactionId, String shopCode, Category category,
         String productId, String productName, String imgUrl, String productUrl, int price,
-        String description, LocalDateTime regDateTime) {
+        String keyword, LocalDateTime regDateTime) {
         this.id = id;
         this.transactionId = transactionId;
         this.shopCode = shopCode;
@@ -35,12 +35,8 @@ public class CrawlingProduct {
         this.imgUrl = imgUrl;
         this.productUrl = productUrl;
         this.price = price;
-        this.description = description;
+        this.keyword = keyword;
         this.regDateTime = regDateTime;
-    }
-
-    public void updateDescription(String keyword) {
-        this.description = description;
     }
 
     public boolean isValid() {

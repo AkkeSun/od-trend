@@ -16,7 +16,7 @@ class CrawlingProductMapper {
             .price(crawlingProduct.getPrice())
             .imgUrl(crawlingProduct.getImgUrl())
             .productUrl(crawlingProduct.getProductUrl())
-            .description(crawlingProduct.getDescription())
+            .keyword(crawlingProduct.getKeyword())
             .category(crawlingProduct.getCategory())
             .regDateTime(crawlingProduct.getRegDateTime())
             .build();
@@ -32,7 +32,7 @@ class CrawlingProductMapper {
             .price(crawlingProductEntity.getPrice())
             .imgUrl(crawlingProductEntity.getImgUrl())
             .productUrl(crawlingProductEntity.getProductUrl())
-            .description(crawlingProductEntity.getDescription())
+            .keyword(crawlingProductEntity.getKeyword())
             .category(crawlingProductEntity.getCategory())
             .regDateTime(crawlingProductEntity.getRegDateTime())
             .build();

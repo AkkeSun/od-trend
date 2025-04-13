@@ -48,8 +48,8 @@ public class CrawlingProductEntity {
     @Column(name = "PRICE")
     private Integer price;
 
-    @Column(name = "DESCRIPTION", columnDefinition = "longtext")
-    private String description;
+    @Column(name = "KEYWORD", columnDefinition = "longtext")
+    private String keyword;
 
     @Column(name = "REG_DATE_TIME")
     private LocalDateTime regDateTime;
@@ -57,7 +57,7 @@ public class CrawlingProductEntity {
     @Builder
     public CrawlingProductEntity(Long id, String transactionId, String shopCode, Category category,
         String productId, String productName, String imgUrl, String productUrl, Integer price,
-        String description, LocalDateTime regDateTime) {
+        String keyword, LocalDateTime regDateTime) {
         this.id = id;
         this.transactionId = transactionId;
         this.shopCode = shopCode;
@@ -67,7 +67,7 @@ public class CrawlingProductEntity {
         this.imgUrl = imgUrl;
         this.productUrl = productUrl;
         this.price = price;
-        this.description = description;
+        this.keyword = keyword;
         this.regDateTime = regDateTime;
     }
 
