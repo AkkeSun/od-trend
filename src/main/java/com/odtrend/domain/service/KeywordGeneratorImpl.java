@@ -33,6 +33,10 @@ public class KeywordGeneratorImpl implements KeywordGenerator {
             .map(word -> word.replaceAll("[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]", ""))
             .filter(word -> !stopWords.contains(word))
             .filter(word -> !word.matches("-?\\d+(\\.\\d+)?"))
+            .filter(word -> !word.matches("(\\d+개)"))
+            .filter(word -> !word.matches("(\\d+인)"))
+            .filter(word -> !word.matches("(\\d+구)"))
+            .filter(word -> !word.matches("(\\d+mah)"))
             .filter(StringUtils::hasText)
             .toList();
     }
