@@ -39,6 +39,10 @@ public class CrawlingProduct {
         this.regDateTime = regDateTime;
     }
 
+    public void updateKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
     public boolean isValid() {
         return StringUtils.hasText(productId) && StringUtils.hasText(productName) &&
             StringUtils.hasText(imgUrl) && StringUtils.hasText(productUrl) && price > 0;

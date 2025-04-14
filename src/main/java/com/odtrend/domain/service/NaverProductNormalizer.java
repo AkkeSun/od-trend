@@ -2,7 +2,6 @@ package com.odtrend.domain.service;
 
 import static com.odtrend.domain.model.ShopInfo.NAVER;
 import static com.odtrend.infrastructure.util.JsonUtil.toJsonNode;
-import static com.odtrend.infrastructure.util.KeywordUtil.getKeywords;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.odtrend.domain.model.CrawlingPage;
@@ -41,7 +40,6 @@ public class NaverProductNormalizer implements ProductNormalizer {
                     .imgUrl(productJson.get("imageUrl").asText())
                     .productUrl(productJson.get("linkUrl").asText())
                     .price(productJson.get("priceValue").asInt())
-                    .keyword(getKeywords(productJson.get("title").asText()).toString())
                     .regDateTime(LocalDateTime.now())
                     .build();
                 if (product.isValid()) {

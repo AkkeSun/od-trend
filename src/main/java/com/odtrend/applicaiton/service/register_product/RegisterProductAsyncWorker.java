@@ -10,6 +10,7 @@ import com.odtrend.domain.model.CrawlingLog;
 import com.odtrend.domain.model.CrawlingPage;
 import com.odtrend.domain.model.CrawlingProduct;
 import com.odtrend.domain.model.ErrorLog;
+import com.odtrend.domain.service.KeywordGenerator;
 import com.odtrend.domain.service.ProductNormaizerFactory;
 import com.odtrend.infrastructure.exception.CustomBusinessException;
 import java.time.LocalDateTime;
@@ -29,6 +30,8 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
     private final ShopClientPort shopClientPort;
 
     private final ProductNormaizerFactory factory;
+
+    private final KeywordGenerator keywordGenerator;
 
     private final ErrorLogStoragePort errorLogStoragePort;
 
@@ -55,6 +58,11 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
 
             products.removeIf(product -> crawlingProductStoragePort.existsByShopCodeAndProductId(
                 product.getShopCode(), product.getProductId()));
+
+            for (CrawlingProduct product : products) {
+                product.updateKeyword(keywordGenerator.generateKeywords(
+                    product.getProductName()).toString());
+            }
 
             crawlingProductStoragePort.saveAll(products);
 
