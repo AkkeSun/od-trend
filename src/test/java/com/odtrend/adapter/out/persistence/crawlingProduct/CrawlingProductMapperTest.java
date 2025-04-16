@@ -26,7 +26,7 @@ class CrawlingProductMapperTest {
                 .price(1000)
                 .imgUrl("imgUrl")
                 .productUrl("productUrl")
-                .description("description")
+                .keyword("keyword")
                 .category(Category.DIGITAL)
                 .regDateTime(LocalDateTime.of(2025, 12, 12, 1, 2, 3))
                 .build();
@@ -43,7 +43,7 @@ class CrawlingProductMapperTest {
             assert entity.getPrice().equals(domain.getPrice());
             assert entity.getImgUrl().equals(domain.getImgUrl());
             assert entity.getProductUrl().equals(domain.getProductUrl());
-            assert entity.getDescription().equals(domain.getDescription());
+            assert entity.getKeyword().equals(domain.getKeyword());
             assert entity.getCategory().equals(domain.getCategory());
             assert entity.getRegDateTime().equals(domain.getRegDateTime());
         }
@@ -66,7 +66,7 @@ class CrawlingProductMapperTest {
                 .price(1000)
                 .imgUrl("imgUrl")
                 .productUrl("productUrl")
-                .description("description")
+                .keyword("keyword")
                 .category(Category.DIGITAL)
                 .regDateTime(LocalDateTime.of(2025, 12, 12, 1, 2, 3))
                 .build();
@@ -83,7 +83,7 @@ class CrawlingProductMapperTest {
             assert entity.getPrice().equals(domain.getPrice());
             assert entity.getImgUrl().equals(domain.getImgUrl());
             assert entity.getProductUrl().equals(domain.getProductUrl());
-            assert entity.getDescription().equals(domain.getDescription());
+            assert entity.getKeyword().equals(domain.getKeyword());
             assert entity.getCategory().equals(domain.getCategory());
             assert entity.getRegDateTime().equals(domain.getRegDateTime());
         }

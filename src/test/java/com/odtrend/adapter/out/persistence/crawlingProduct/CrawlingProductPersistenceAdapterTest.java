@@ -37,7 +37,7 @@ class CrawlingProductPersistenceAdapterTest extends IntegrationTestSupport {
                 .price(1000)
                 .imgUrl("imgUrl")
                 .productUrl("productUrl")
-                .description("description")
+                .keyword("keyword")
                 .build();
             CrawlingProduct product2 = CrawlingProduct.builder()
                 .transactionId("transactionId")
@@ -47,7 +47,7 @@ class CrawlingProductPersistenceAdapterTest extends IntegrationTestSupport {
                 .price(2000)
                 .imgUrl("imgUrl2")
                 .productUrl("productUrl2")
-                .description("description2")
+                .keyword("keyword")
                 .build();
 
             // when
@@ -63,7 +63,7 @@ class CrawlingProductPersistenceAdapterTest extends IntegrationTestSupport {
             assert entities.get(0).getPrice().equals(product.getPrice());
             assert entities.get(0).getImgUrl().equals(product.getImgUrl());
             assert entities.get(0).getProductUrl().equals(product.getProductUrl());
-            assert entities.get(0).getDescription().equals(product.getDescription());
+            assert entities.get(0).getKeyword().equals(product.getKeyword());
             assert entities.get(1).getTransactionId().equals(product2.getTransactionId());
             assert entities.get(1).getShopCode().equals(product2.getShopCode());
             assert entities.get(1).getProductId().equals(product2.getProductId());
@@ -71,7 +71,7 @@ class CrawlingProductPersistenceAdapterTest extends IntegrationTestSupport {
             assert entities.get(1).getPrice().equals(product2.getPrice());
             assert entities.get(1).getImgUrl().equals(product2.getImgUrl());
             assert entities.get(1).getProductUrl().equals(product2.getProductUrl());
-            assert entities.get(1).getDescription().equals(product2.getDescription());
+            assert entities.get(1).getKeyword().equals(product2.getKeyword());
 
         }
     }

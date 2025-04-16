@@ -41,9 +41,10 @@ class RegisterProductAsyncWorkerTest extends IntegrationTestSupport {
 
     @AfterEach
     public void shutdown() throws IOException {
-        mockWebServer.shutdown();
         crawlingProductRepository.deleteAll();
+        crawlingLogRepository.deleteAll();
         errorLogRepository.deleteAll();
+        mockWebServer.shutdown();
     }
 
     @Nested
@@ -84,7 +85,7 @@ class RegisterProductAsyncWorkerTest extends IntegrationTestSupport {
                 .build();
             mockWebServer.enqueue(new MockResponse()
                 .setResponseCode(200)
-                .setBody(""));
+                .setBody("success"));
 
             // when
             worker.registerProduct(crawlingPage);
@@ -109,7 +110,7 @@ class RegisterProductAsyncWorkerTest extends IntegrationTestSupport {
                 .build();
             mockWebServer.enqueue(new MockResponse()
                 .setResponseCode(200)
-                .setBody(""));
+                .setBody("success"));
 
             // when
             worker.registerProduct(crawlingPage);
