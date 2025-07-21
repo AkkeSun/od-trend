@@ -25,6 +25,8 @@ dependencies {
 
     implementation 'mysql:mysql-connector-java:8.0.33'
 
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'com.h2database:h2'
