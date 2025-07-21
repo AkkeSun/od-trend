@@ -10,7 +10,6 @@ import com.odtrend.domain.model.CrawlingLog;
 import com.odtrend.domain.model.CrawlingPage;
 import com.odtrend.domain.model.CrawlingProduct;
 import com.odtrend.domain.model.ErrorLog;
-import com.odtrend.domain.service.KeywordGenerator;
 import com.odtrend.domain.service.ProductNormaizerFactory;
 import com.odtrend.infrastructure.exception.CustomBusinessException;
 import java.time.LocalDateTime;
@@ -31,8 +30,6 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
 
     private final ProductNormaizerFactory factory;
 
-    private final KeywordGenerator keywordGenerator;
-
     private final ErrorLogStoragePort errorLogStoragePort;
 
     private final CrawlingLogStoragePort crawlingLogStoragePort;
@@ -42,7 +39,7 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
     @Override
     public void registerProduct(CrawlingPage crawlingPage) {
         String transactionId = UUID.randomUUID().toString();
-        log.info("register_product start - " + transactionId);
+        log.info("register_product start - {}", transactionId);
         try {
             String crawlingResult = shopClientPort.getProducts(crawlingPage);
             log.info("register_product crawling success ");
@@ -59,9 +56,9 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
             products.removeIf(product -> crawlingProductStoragePort.existsByShopCodeAndProductId(
                 product.getShopCode(), product.getProductId()));
 
+            // TODO: Gemini keyword 추출
             for (CrawlingProduct product : products) {
-                product.updateKeyword(keywordGenerator.generateKeywords(
-                    product.getProductName()).toString());
+                //
             }
 
             crawlingProductStoragePort.saveAll(products);
