@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.external;
+package com.odtrend.adapter.out.client.shop;
 
 import static org.junit.Assert.assertThrows;
 

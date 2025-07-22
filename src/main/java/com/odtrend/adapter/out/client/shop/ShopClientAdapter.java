@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.external;
+package com.odtrend.adapter.out.client.shop;
 
 import static com.odtrend.infrastructure.exception.ErrorCode.Client_Call_Error;
 
