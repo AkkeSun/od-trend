@@ -9,12 +9,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class ErrorLogPersistenceAdapter implements ErrorLogStoragePort {
 
-    private final ErrorLogMapper errorLogMapper;
     private final ErrorLogRepository errorLogRepository;
 
     @Override
     public void save(ErrorLog errorLog) {
-        ErrorLogEntity errorLogEntity = errorLogMapper.toEntity(errorLog);
-        errorLogRepository.save(errorLogEntity);
+        errorLogRepository.save(ErrorLogEntity.of(errorLog));
     }
 }

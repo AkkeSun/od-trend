@@ -1,6 +1,7 @@
 package com.odtrend.adapter.out.persistence.crawlingProduct;
 
 import com.odtrend.domain.model.Category;
+import com.odtrend.domain.model.CrawlingProduct;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -84,5 +88,37 @@ public class CrawlingProductEntity {
         if (productUrl.length() > 100) {
             productUrl = productUrl.substring(0, 100);
         }
+    }
+
+    static CrawlingProductEntity of(CrawlingProduct crawlingProduct) {
+        return CrawlingProductEntity.builder()
+                .id(crawlingProduct.getId())
+                .transactionId(crawlingProduct.getTransactionId())
+                .shopCode(crawlingProduct.getShopCode())
+                .productId(crawlingProduct.getProductId())
+                .productName(crawlingProduct.getProductName())
+                .price(crawlingProduct.getPrice())
+                .imgUrl(crawlingProduct.getImgUrl())
+                .productUrl(crawlingProduct.getProductUrl())
+                .keyword(crawlingProduct.getKeywords() == null ? null : String.join(",", crawlingProduct.getKeywords()).trim())
+                .category(crawlingProduct.getCategory())
+                .regDateTime(crawlingProduct.getRegDateTime())
+                .build();
+    }
+
+    CrawlingProduct toDomain() {
+        return CrawlingProduct.builder()
+                .id(id)
+                .transactionId(transactionId)
+                .shopCode(shopCode)
+                .productId(productId)
+                .productName(productName)
+                .price(price)
+                .imgUrl(imgUrl)
+                .productUrl(productUrl)
+                .keywords(keyword == null ? null : new HashSet<>(List.of(keyword.split(","))))
+                .category(category)
+                .regDateTime(regDateTime)
+                .build();
     }
 }

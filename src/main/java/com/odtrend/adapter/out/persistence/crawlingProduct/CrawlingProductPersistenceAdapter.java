@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class CrawlingProductPersistenceAdapter implements CrawlingProductStoragePort {
 
-    private final CrawlingProductMapper mapper;
     private final CrawlingProductRepository crawlingProductRepository;
 
     @Override
@@ -18,7 +17,7 @@ class CrawlingProductPersistenceAdapter implements CrawlingProductStoragePort {
         crawlingProductRepository.saveAll(
             products.stream()
                 .map(domain -> {
-                    CrawlingProductEntity entity = mapper.toEntity(domain);
+                    CrawlingProductEntity entity = CrawlingProductEntity.of(domain);
                     entity.updateFieldSize();
                     return entity;
                 })

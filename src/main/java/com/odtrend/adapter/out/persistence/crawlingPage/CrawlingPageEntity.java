@@ -1,6 +1,8 @@
 package com.odtrend.adapter.out.persistence.crawlingPage;
 
 import com.odtrend.domain.model.Category;
+import com.odtrend.domain.model.CrawlingPage;
+import com.odtrend.domain.model.CrawlingPageHeader;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -60,5 +62,45 @@ public class CrawlingPageEntity {
         this.category = category;
         this.useYn = useYn;
         this.headers = headers;
+    }
+
+    static CrawlingPageEntity of(CrawlingPage crawlingPage) {
+        return CrawlingPageEntity.builder()
+                .id(crawlingPage.id())
+                .url(crawlingPage.url())
+                .body(crawlingPage.body())
+                .shopCode(crawlingPage.shopCode())
+                .method(crawlingPage.method())
+                .category(crawlingPage.category())
+                .headers(crawlingPage.headers().isEmpty() ? null :
+                        crawlingPage.headers().stream()
+                                .map(domain -> CrawlingPageHeaderEntity.builder()
+                                        .id(domain.id())
+                                        .headerKey(domain.headerKey())
+                                        .headerValue(domain.headerValue())
+                                        .build())
+                                .toList())
+                .useYn(crawlingPage.useYn())
+                .build();
+    }
+
+    CrawlingPage toDomain() {
+        return CrawlingPage.builder()
+                .id(id)
+                .url(url)
+                .body(body)
+                .shopCode(shopCode)
+                .method(method)
+                .category(category)
+                .headers(headers.isEmpty() ? null :
+                        headers.stream()
+                                .map(persistence -> CrawlingPageHeader.builder()
+                                        .id(persistence.getId())
+                                        .headerKey(persistence.getHeaderKey())
+                                        .headerValue(persistence.getHeaderValue())
+                                        .build())
+                                .toList())
+                .useYn(useYn)
+                .build();
     }
 }

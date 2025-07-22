@@ -9,13 +9,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class CrawlingLogPersistenceAdapter implements CrawlingLogStoragePort {
 
-    private final CrawlingLogMapper crawlingLogMapper;
-
     private final CrawlingLogRepository crawlingLogRepository;
 
     @Override
     public void save(CrawlingLog crawlingLog) {
-        CrawlingLogEntity crawlingLogEntity = crawlingLogMapper.toEntity(crawlingLog);
+        CrawlingLogEntity crawlingLogEntity = CrawlingLogEntity.of(crawlingLog);
         crawlingLogRepository.save(crawlingLogEntity);
     }
 }

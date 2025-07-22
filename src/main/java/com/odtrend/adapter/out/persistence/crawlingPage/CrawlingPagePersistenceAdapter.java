@@ -10,13 +10,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class CrawlingPagePersistenceAdapter implements CrawlingPageStoragePort {
 
-    private final CrawlingPageMapper mapper;
     private final CrawlingPageRepository repository;
 
     @Override
     public List<CrawlingPage> findAll() {
         return repository.findAllByUseYn("Y").stream()
-            .map(mapper::toDomain)
+            .map(CrawlingPageEntity::toDomain)
             .toList();
     }
 }
