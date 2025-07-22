@@ -2,10 +2,7 @@ package com.odtrend.applicaiton.service.register_product;
 
 import static com.odtrend.infrastructure.util.GzipUtil.compress;
 
-import com.odtrend.applicaiton.port.out.CrawlingLogStoragePort;
-import com.odtrend.applicaiton.port.out.CrawlingProductStoragePort;
-import com.odtrend.applicaiton.port.out.ErrorLogStoragePort;
-import com.odtrend.applicaiton.port.out.ShopClientPort;
+import com.odtrend.applicaiton.port.out.*;
 import com.odtrend.domain.model.CrawlingLog;
 import com.odtrend.domain.model.CrawlingPage;
 import com.odtrend.domain.model.CrawlingProduct;
@@ -55,12 +52,6 @@ class RegisterProductAsyncWorker implements RegisterProductAsync {
 
             products.removeIf(product -> crawlingProductStoragePort.existsByShopCodeAndProductId(
                 product.getShopCode(), product.getProductId()));
-
-            // TODO: Gemini keyword 추출
-            for (CrawlingProduct product : products) {
-                //
-            }
-
             crawlingProductStoragePort.saveAll(products);
 
             log.info("register_product: {} - {} - {}",
