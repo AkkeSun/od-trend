@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface ProductNormalizer {
 
-    String getShopCode();
-
     List<CrawlingProduct> normalize(CrawlingPage crawlingPage, String transactionId,
         String crawlingResult);
 }

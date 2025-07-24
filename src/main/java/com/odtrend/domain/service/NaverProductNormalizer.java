@@ -1,6 +1,5 @@
 package com.odtrend.domain.service;
 
-import static com.odtrend.domain.model.ShopInfo.NAVER;
 import static com.odtrend.infrastructure.util.JsonUtil.toJsonNode;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,17 +10,8 @@ import com.odtrend.infrastructure.exception.ErrorCode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
-@Slf4j
-@Component
 public class NaverProductNormalizer implements ProductNormalizer {
-
-    @Override
-    public String getShopCode() {
-        return NAVER.getShopCode();
-    }
 
     @Override
     public List<CrawlingProduct> normalize(CrawlingPage crawlingPage, String transactionId,
@@ -52,7 +42,6 @@ public class NaverProductNormalizer implements ProductNormalizer {
             }
             return products;
         } catch (Exception e) {
-            log.error("NaverProductNormalizer error: {}", e.getMessage());
             throw new CustomBusinessException(ErrorCode.Product_Nomalizer_Error);
         }
     }

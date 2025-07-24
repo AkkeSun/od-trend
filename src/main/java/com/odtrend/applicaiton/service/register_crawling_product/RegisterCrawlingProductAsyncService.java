@@ -1,5 +1,6 @@
 package com.odtrend.applicaiton.service.register_crawling_product;
 
+import static com.odtrend.domain.service.ProductNormaizerFactory.getNormalizer;
 import static com.odtrend.infrastructure.util.GzipUtil.compress;
 
 import com.odtrend.applicaiton.port.in.RegisterCrawlingProductAsyncUseCase;
@@ -11,7 +12,6 @@ import com.odtrend.domain.model.CrawlingLog;
 import com.odtrend.domain.model.CrawlingPage;
 import com.odtrend.domain.model.CrawlingProduct;
 import com.odtrend.domain.model.ErrorLog;
-import com.odtrend.domain.service.ProductNormaizerFactory;
 import com.odtrend.infrastructure.exception.CustomBusinessException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,8 +28,6 @@ import org.springframework.stereotype.Component;
 class RegisterCrawlingProductAsyncService implements RegisterCrawlingProductAsyncUseCase {
 
     private final ShopClientPort shopClientPort;
-
-    private final ProductNormaizerFactory factory;
 
     private final ErrorLogStoragePort errorLogStoragePort;
 
@@ -51,7 +49,7 @@ class RegisterCrawlingProductAsyncService implements RegisterCrawlingProductAsyn
                 .regDateTime(LocalDateTime.now())
                 .build());
 
-            List<CrawlingProduct> products = factory.getNormalizer(crawlingPage.shopCode())
+            List<CrawlingProduct> products = getNormalizer(crawlingPage.shopCode())
                 .normalize(crawlingPage, transactionId, crawlingResult);
 
             products.removeIf(product -> crawlingProductStoragePort.existsByShopCodeAndProductId(
