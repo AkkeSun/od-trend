@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.persistence.crawlingProduct;
+package com.odtrend.adapter.out.persistence.crawling.crawlingProduct;
 
 import com.odtrend.domain.model.Category;
 import com.odtrend.domain.model.CrawlingProduct;
@@ -10,9 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,16 +49,13 @@ public class CrawlingProductEntity {
     @Column(name = "PRICE")
     private Integer price;
 
-    @Column(name = "KEYWORD", columnDefinition = "longtext")
-    private String keyword;
-
     @Column(name = "REG_DATE_TIME")
     private LocalDateTime regDateTime;
 
     @Builder
     public CrawlingProductEntity(Long id, String transactionId, String shopCode, Category category,
         String productId, String productName, String imgUrl, String productUrl, Integer price,
-        String keyword, LocalDateTime regDateTime) {
+        LocalDateTime regDateTime) {
         this.id = id;
         this.transactionId = transactionId;
         this.shopCode = shopCode;
@@ -71,8 +65,22 @@ public class CrawlingProductEntity {
         this.imgUrl = imgUrl;
         this.productUrl = productUrl;
         this.price = price;
-        this.keyword = keyword;
         this.regDateTime = regDateTime;
+    }
+
+    static CrawlingProductEntity of(CrawlingProduct crawlingProduct) {
+        return CrawlingProductEntity.builder()
+            .id(crawlingProduct.getId())
+            .transactionId(crawlingProduct.getTransactionId())
+            .shopCode(crawlingProduct.getShopCode())
+            .productId(crawlingProduct.getProductId())
+            .productName(crawlingProduct.getProductName())
+            .price(crawlingProduct.getPrice())
+            .imgUrl(crawlingProduct.getImgUrl())
+            .productUrl(crawlingProduct.getProductUrl())
+            .category(crawlingProduct.getCategory())
+            .regDateTime(crawlingProduct.getRegDateTime())
+            .build();
     }
 
     public void updateFieldSize() {
@@ -90,35 +98,18 @@ public class CrawlingProductEntity {
         }
     }
 
-    static CrawlingProductEntity of(CrawlingProduct crawlingProduct) {
-        return CrawlingProductEntity.builder()
-                .id(crawlingProduct.getId())
-                .transactionId(crawlingProduct.getTransactionId())
-                .shopCode(crawlingProduct.getShopCode())
-                .productId(crawlingProduct.getProductId())
-                .productName(crawlingProduct.getProductName())
-                .price(crawlingProduct.getPrice())
-                .imgUrl(crawlingProduct.getImgUrl())
-                .productUrl(crawlingProduct.getProductUrl())
-                .keyword(crawlingProduct.getKeywords() == null ? null : String.join(",", crawlingProduct.getKeywords()).trim())
-                .category(crawlingProduct.getCategory())
-                .regDateTime(crawlingProduct.getRegDateTime())
-                .build();
-    }
-
     CrawlingProduct toDomain() {
         return CrawlingProduct.builder()
-                .id(id)
-                .transactionId(transactionId)
-                .shopCode(shopCode)
-                .productId(productId)
-                .productName(productName)
-                .price(price)
-                .imgUrl(imgUrl)
-                .productUrl(productUrl)
-                .keywords(keyword == null ? null : new HashSet<>(List.of(keyword.split(","))))
-                .category(category)
-                .regDateTime(regDateTime)
-                .build();
+            .id(id)
+            .transactionId(transactionId)
+            .shopCode(shopCode)
+            .productId(productId)
+            .productName(productName)
+            .price(price)
+            .imgUrl(imgUrl)
+            .productUrl(productUrl)
+            .category(category)
+            .regDateTime(regDateTime)
+            .build();
     }
 }

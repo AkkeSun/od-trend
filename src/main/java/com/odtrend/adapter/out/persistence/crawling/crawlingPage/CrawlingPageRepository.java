@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.persistence.crawlingPage;
+package com.odtrend.adapter.out.persistence.crawling.crawlingPage;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

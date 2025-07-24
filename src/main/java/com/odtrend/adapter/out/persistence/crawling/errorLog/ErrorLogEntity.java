@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.persistence.errorLog;
+package com.odtrend.adapter.out.persistence.crawling.errorLog;
 
 import com.odtrend.domain.model.ErrorLog;
 import jakarta.persistence.Column;
@@ -49,23 +49,23 @@ public class ErrorLogEntity {
 
     static ErrorLogEntity of(ErrorLog errorLog) {
         return ErrorLogEntity.builder()
-                .id(errorLog.id())
-                .errorMessage(errorLog.errorMessage())
-                .errorCode(errorLog.errorCode())
-                .domain(errorLog.domain())
-                .description(errorLog.description())
-                .regDateTime(errorLog.regDateTime())
-                .build();
+            .id(errorLog.id())
+            .errorMessage(errorLog.errorMessage())
+            .errorCode(errorLog.errorCode())
+            .domain(errorLog.domain())
+            .description(errorLog.description())
+            .regDateTime(errorLog.regDateTime())
+            .build();
     }
 
     ErrorLog toDomain() {
         return ErrorLog.builder()
-                .id(id)
-                .errorMessage(errorMessage)
-                .errorCode(errorCode)
-                .domain(domain)
-                .description(description)
-                .regDateTime(regDateTime)
-                .build();
+            .id(id)
+            .errorMessage(errorMessage)
+            .errorCode(errorCode)
+            .domain(domain)
+            .description(description)
+            .regDateTime(regDateTime)
+            .build();
     }
 }
