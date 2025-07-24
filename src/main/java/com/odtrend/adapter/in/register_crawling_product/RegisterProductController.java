@@ -1,6 +1,6 @@
-package com.odtrend.adapter.in.register_product;
+package com.odtrend.adapter.in.register_crawling_product;
 
-import com.odtrend.applicaiton.port.in.RegisterProductUseCase;
+import com.odtrend.applicaiton.port.in.RegisterCrawlingProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RegisterProductController {
 
-    private final RegisterProductUseCase registerProductUseCase;
+    private final RegisterCrawlingProductUseCase registerProductUseCase;
 
     @PostMapping("/products")
     void registerProducts() {

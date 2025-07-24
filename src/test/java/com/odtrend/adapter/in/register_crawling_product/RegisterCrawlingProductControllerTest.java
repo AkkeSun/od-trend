@@ -1,4 +1,4 @@
-package com.odtrend.adapter.in.register_product;
+package com.odtrend.adapter.in.register_crawling_product;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-class RegisterProductControllerTest extends ControllerTestSupport {
+class RegisterCrawlingProductControllerTest extends ControllerTestSupport {
 
 
     @Nested

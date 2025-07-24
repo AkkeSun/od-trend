@@ -1,4 +1,4 @@
-package com.odtrend.applicaiton.service.register_product;
+package com.odtrend.applicaiton.service.register_crawling_product;
 
 import com.odtrend.IntegrationTestSupport;
 import com.odtrend.adapter.out.persistence.crawling.crawlingLog.CrawlingLogEntity;
@@ -7,6 +7,7 @@ import com.odtrend.adapter.out.persistence.crawling.crawlingProduct.CrawlingProd
 import com.odtrend.adapter.out.persistence.crawling.crawlingProduct.CrawlingProductRepository;
 import com.odtrend.adapter.out.persistence.crawling.errorLog.ErrorLogEntity;
 import com.odtrend.adapter.out.persistence.crawling.errorLog.ErrorLogRepository;
+import com.odtrend.applicaiton.port.in.RegisterCrawlingProductAsyncUseCase;
 import com.odtrend.domain.model.CrawlingPage;
 import java.io.IOException;
 import java.util.List;
@@ -20,10 +21,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class RegisterProductAsyncWorkerTest extends IntegrationTestSupport {
+class RegisterCrawlingProductAsyncServiceTest extends IntegrationTestSupport {
 
     @Autowired
-    RegisterProductAsync worker;
+    RegisterCrawlingProductAsyncUseCase worker;
     @Autowired
     CrawlingProductRepository crawlingProductRepository;
     @Autowired

@@ -1,8 +1,8 @@
-package com.odtrend.applicaiton.service.register_product;
+package com.odtrend.applicaiton.port.in;
 
 import com.odtrend.domain.model.CrawlingPage;
 
-public interface RegisterProductAsync {
+public interface RegisterCrawlingProductAsyncUseCase {
 
     void registerProduct(CrawlingPage crawlingPage);
 

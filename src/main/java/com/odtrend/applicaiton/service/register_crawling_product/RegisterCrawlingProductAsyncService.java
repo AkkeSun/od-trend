@@ -1,8 +1,12 @@
-package com.odtrend.applicaiton.service.register_product;
+package com.odtrend.applicaiton.service.register_crawling_product;
 
 import static com.odtrend.infrastructure.util.GzipUtil.compress;
 
-import com.odtrend.applicaiton.port.out.*;
+import com.odtrend.applicaiton.port.in.RegisterCrawlingProductAsyncUseCase;
+import com.odtrend.applicaiton.port.out.CrawlingLogStoragePort;
+import com.odtrend.applicaiton.port.out.CrawlingProductStoragePort;
+import com.odtrend.applicaiton.port.out.ErrorLogStoragePort;
+import com.odtrend.applicaiton.port.out.ShopClientPort;
 import com.odtrend.domain.model.CrawlingLog;
 import com.odtrend.domain.model.CrawlingPage;
 import com.odtrend.domain.model.CrawlingProduct;
@@ -21,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class RegisterProductAsyncWorker implements RegisterProductAsync {
+class RegisterCrawlingProductAsyncService implements RegisterCrawlingProductAsyncUseCase {
 
     private final ShopClientPort shopClientPort;
 

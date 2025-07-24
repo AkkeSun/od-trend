@@ -1,6 +1,6 @@
 package com.odtrend.applicaiton.port.in;
 
-public interface RegisterProductUseCase {
+public interface RegisterCrawlingProductUseCase {
 
     void registerProduct();
 }
