@@ -29,3 +29,11 @@ spring:
 server:
   port: 8090
   shutdown: graceful
+
+service-constant:
+  external:
+    elasticsearch:
+      host: http://152.67.206.159:9200
+    gemini:
+      host: https://generativelanguage.googleapis.com
+      token: ENC(ZPLYw01PN3zWc7KRflLns57q1PTgjDoUykFdowInijJndfciekAX6VVsxi650HxC)
