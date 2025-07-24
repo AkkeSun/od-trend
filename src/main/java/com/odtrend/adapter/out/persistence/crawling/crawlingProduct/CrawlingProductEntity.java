@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity(name = "CRAWLING_PRODUCT")
-public class CrawlingProductEntity {
+class CrawlingProductEntity {
 
     @Id
     @Column(name = "ID")
@@ -53,7 +53,7 @@ public class CrawlingProductEntity {
     private LocalDateTime regDateTime;
 
     @Builder
-    public CrawlingProductEntity(Long id, String transactionId, String shopCode, Category category,
+    CrawlingProductEntity(Long id, String transactionId, String shopCode, Category category,
         String productId, String productName, String imgUrl, String productUrl, Integer price,
         LocalDateTime regDateTime) {
         this.id = id;

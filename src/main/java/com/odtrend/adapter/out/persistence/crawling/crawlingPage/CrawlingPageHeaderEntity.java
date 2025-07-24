@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity(name = "CRAWLING_PAGE_HEADER")
-public class CrawlingPageHeaderEntity {
+class CrawlingPageHeaderEntity {
 
     @Id
     @Column(name = "ID")
@@ -26,7 +26,7 @@ public class CrawlingPageHeaderEntity {
     private String headerValue;
 
     @Builder
-    public CrawlingPageHeaderEntity(Long id, String headerKey, String headerValue) {
+    CrawlingPageHeaderEntity(Long id, String headerKey, String headerValue) {
         this.id = id;
         this.headerKey = headerKey;
         this.headerValue = headerValue;

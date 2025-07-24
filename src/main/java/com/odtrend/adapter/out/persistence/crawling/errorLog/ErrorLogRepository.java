@@ -2,6 +2,6 @@ package com.odtrend.adapter.out.persistence.crawling.errorLog;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ErrorLogRepository extends JpaRepository<ErrorLogEntity, Long> {
+interface ErrorLogRepository extends JpaRepository<ErrorLogEntity, Long> {
 
 }

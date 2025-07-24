@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity(name = "ERROR_LOG")
-public class ErrorLogEntity {
+class ErrorLogEntity {
 
     @Id
     @Column(name = "ID")
@@ -37,7 +37,7 @@ public class ErrorLogEntity {
     private LocalDateTime regDateTime;
 
     @Builder
-    public ErrorLogEntity(Long id, String domain, int errorCode, String errorMessage,
+    ErrorLogEntity(Long id, String domain, int errorCode, String errorMessage,
         String description, LocalDateTime regDateTime) {
         this.id = id;
         this.domain = domain;

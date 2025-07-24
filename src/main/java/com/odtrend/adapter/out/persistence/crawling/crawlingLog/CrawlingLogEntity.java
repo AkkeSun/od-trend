@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity(name = "CRAWLING_LOG")
-public class CrawlingLogEntity {
+class CrawlingLogEntity {
 
     @Id
     @Column(name = "ID")
@@ -34,7 +34,7 @@ public class CrawlingLogEntity {
     private LocalDateTime regDateTime;
 
     @Builder
-    public CrawlingLogEntity(Long id, Long crawlingPageId, String transactionId,
+    CrawlingLogEntity(Long id, Long crawlingPageId, String transactionId,
         String crawlingData, LocalDateTime regDateTime) {
         this.id = id;
         this.crawlingPageId = crawlingPageId;
