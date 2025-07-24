@@ -9,10 +9,22 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
-    url: jdbc:mysql://140.245.70.130:3306/trend?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: akkessun
-    password: sunyang2ek+
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    crawling:
+      url: jdbc:mysql://140.245.70.130:3306/trend?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+      username: akkessun
+      password: sunyang2ek+
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    recommend:
+      shard1:
+        url: jdbc:mysql://140.245.70.130:3306/product1?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+        username: akkessun
+        password: sunyang2ek+
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      shard2:
+        url: jdbc:mysql://140.245.70.130:3306/product2?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+        username: akkessun
+        password: sunyang2ek+
+        driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
   port: 8090

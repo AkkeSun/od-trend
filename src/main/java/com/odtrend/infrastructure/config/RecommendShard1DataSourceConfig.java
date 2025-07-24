@@ -1,0 +1,71 @@
+package com.odtrend.infrastructure.config;
+
+import jakarta.persistence.EntityManagerFactory;
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(
+    basePackages = "com.odtrend.adapter.out.persistence.recommend.shard1",
+    entityManagerFactoryRef = "recommendShard1EntityManagerFactory",
+    transactionManagerRef = "recommendShard1TransactionManager"
+)
+public class RecommendShard1DataSourceConfig {
+
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String ddlAuto;
+
+    @Bean
+    @ConfigurationProperties("spring.datasource.recommend.shard1")
+    public DataSourceProperties recommendShard1DataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
+    public DataSource recommendShard1DataSource(
+        @Qualifier("recommendShard1DataSourceProperties") DataSourceProperties dataSourceProperties
+    ) {
+        return dataSourceProperties
+            .initializeDataSourceBuilder()
+            .build();
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean recommendShard1EntityManagerFactory(
+        EntityManagerFactoryBuilder builder,
+        @Qualifier("recommendShard1DataSource") DataSource dataSource
+    ) {
+        Map<String, Object> props = new HashMap<>();
+        props.put("hibernate.hbm2ddl.auto", ddlAuto);
+        props.put("hibernate.physical_naming_strategy",
+            "org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl");
+
+        return builder
+            .dataSource(dataSource)
+            .packages("com.odtrend.adapter.out.persistence.recommend.shard1")
+            .persistenceUnit("recommendEntityManager")
+            .properties(props)
+            .build();
+    }
+
+    @Bean
+    public PlatformTransactionManager recommendShard1TransactionManager(
+        @Qualifier("recommendShard1EntityManagerFactory") EntityManagerFactory entityManagerFactory
+    ) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
+}
