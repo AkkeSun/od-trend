@@ -15,4 +15,13 @@ public class JsonUtil {
             throw new RuntimeException("Failed to parse JSON string: " + jsonString, e);
         }
     }
+
+    public static String toJsonString(Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
