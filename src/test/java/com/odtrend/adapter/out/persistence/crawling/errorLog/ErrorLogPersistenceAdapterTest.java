@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.persistence.errorLog;
+package com.odtrend.adapter.out.persistence.crawling.errorLog;
 
 import com.odtrend.IntegrationTestSupport;
 import com.odtrend.domain.model.ErrorLog;

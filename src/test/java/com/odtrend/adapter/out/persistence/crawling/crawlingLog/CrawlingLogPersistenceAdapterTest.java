@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.persistence.crawlingLog;
+package com.odtrend.adapter.out.persistence.crawling.crawlingLog;
 
 import com.odtrend.IntegrationTestSupport;
 import com.odtrend.domain.model.CrawlingLog;

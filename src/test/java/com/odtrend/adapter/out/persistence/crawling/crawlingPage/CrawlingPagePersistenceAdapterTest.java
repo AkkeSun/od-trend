@@ -1,4 +1,4 @@
-package com.odtrend.adapter.out.persistence.crawlingPage;
+package com.odtrend.adapter.out.persistence.crawling.crawlingPage;
 
 import com.odtrend.IntegrationTestSupport;
 import com.odtrend.domain.model.Category;

@@ -1,12 +1,12 @@
 package com.odtrend.applicaiton.service.register_product;
 
 import com.odtrend.IntegrationTestSupport;
-import com.odtrend.adapter.out.persistence.crawlingLog.CrawlingLogEntity;
-import com.odtrend.adapter.out.persistence.crawlingLog.CrawlingLogRepository;
-import com.odtrend.adapter.out.persistence.crawlingProduct.CrawlingProductEntity;
-import com.odtrend.adapter.out.persistence.crawlingProduct.CrawlingProductRepository;
-import com.odtrend.adapter.out.persistence.errorLog.ErrorLogEntity;
-import com.odtrend.adapter.out.persistence.errorLog.ErrorLogRepository;
+import com.odtrend.adapter.out.persistence.crawling.crawlingLog.CrawlingLogEntity;
+import com.odtrend.adapter.out.persistence.crawling.crawlingLog.CrawlingLogRepository;
+import com.odtrend.adapter.out.persistence.crawling.crawlingProduct.CrawlingProductEntity;
+import com.odtrend.adapter.out.persistence.crawling.crawlingProduct.CrawlingProductRepository;
+import com.odtrend.adapter.out.persistence.crawling.errorLog.ErrorLogEntity;
+import com.odtrend.adapter.out.persistence.crawling.errorLog.ErrorLogRepository;
 import com.odtrend.domain.model.CrawlingPage;
 import java.io.IOException;
 import java.util.List;
