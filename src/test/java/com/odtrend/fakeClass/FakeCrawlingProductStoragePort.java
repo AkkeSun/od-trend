@@ -1,6 +1,7 @@
 package com.odtrend.fakeClass;
 
 import com.odtrend.applicaiton.port.out.CrawlingProductStoragePort;
+import com.odtrend.domain.model.Category;
 import com.odtrend.domain.model.CrawlingProduct;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,10 +12,12 @@ public class FakeCrawlingProductStoragePort implements CrawlingProductStoragePor
     public List<CrawlingProduct> database = new ArrayList<>();
 
     @Override
-    public List<CrawlingProduct> findByRegDateTime(LocalDateTime start, LocalDateTime end) {
+    public List<CrawlingProduct> findByRegDateTimeAndCategory(LocalDateTime start,
+        LocalDateTime end, Category category) {
         return database.stream()
-            .filter(product -> product.getRegDateTime().isAfter(start.minusSeconds(1)) &&
-                product.getRegDateTime().isBefore(end.plusSeconds(1)))
+            .filter(product -> product.getRegDateTime().isAfter(start.minusSeconds(1)))
+            .filter(product -> product.getRegDateTime().isBefore(end.plusSeconds(1)))
+            .filter(product -> product.getCategory().equals(category))
             .toList();
     }
 
