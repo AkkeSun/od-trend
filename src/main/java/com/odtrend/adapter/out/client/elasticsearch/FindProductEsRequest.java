@@ -1,21 +1,21 @@
 package com.odtrend.adapter.out.client.elasticsearch;
 
-import com.odtrend.adapter.out.client.elasticsearch.FindProductEsByEmbeddingRequest.Knn.Filter;
+import com.odtrend.adapter.out.client.elasticsearch.FindProductEsRequest.Knn.Filter;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Builder;
 
 @Builder
-record FindProductEsByEmbeddingRequest(
+record FindProductEsRequest(
     int size,
     Knn knn
 
 ) {
 
-    static FindProductEsByEmbeddingRequest of(
+    static FindProductEsRequest of(
         float[] embedding, String category
     ) {
-        return FindProductEsByEmbeddingRequest.builder()
+        return FindProductEsRequest.builder()
             .size(20)
             .knn(Knn.builder()
                 .filter(Filter.of(category))

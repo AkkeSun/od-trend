@@ -7,5 +7,5 @@ import org.springframework.web.service.annotation.PostExchange;
 public interface ElasticSearchClient {
 
     @PostExchange(url = "/product/_search", contentType = MediaType.APPLICATION_JSON_VALUE)
-    FindProductsEsResponse findProducts(@RequestBody String request);
+    FindProductEsResponse findProducts(@RequestBody String request);
 }

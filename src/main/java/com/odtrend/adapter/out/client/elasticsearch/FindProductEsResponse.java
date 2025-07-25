@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.Builder;
 
 @Builder
-public record FindProductsEsResponse(
+public record FindProductEsResponse(
     int took,
     boolean timed_out,
     Shards _shards,
