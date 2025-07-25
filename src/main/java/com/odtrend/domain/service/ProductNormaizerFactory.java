@@ -1,5 +1,8 @@
 package com.odtrend.domain.service;
 
+import static com.odtrend.infrastructure.exception.ErrorCode.Product_Nomalizer_Factory_Error;
+
+import com.odtrend.infrastructure.exception.CustomBusinessException;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,7 +25,11 @@ public enum ProductNormaizerFactory {
     }
 
     public static ProductNormalizer getNormalizer(String shopCode) {
-        return BY_SHOP_CODE.get(shopCode).normalizer;
+        try {
+            return BY_SHOP_CODE.get(shopCode).normalizer;
+        } catch (Exception e) {
+            throw new CustomBusinessException(Product_Nomalizer_Factory_Error);
+        }
     }
 
     private static final Map<String, ProductNormaizerFactory> BY_SHOP_CODE =
