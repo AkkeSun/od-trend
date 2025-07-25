@@ -1,6 +1,7 @@
 package com.odtrend.adapter.out.persistence.crawling.crawlingProduct;
 
 import com.odtrend.applicaiton.port.out.CrawlingProductStoragePort;
+import com.odtrend.domain.model.Category;
 import com.odtrend.domain.model.CrawlingProduct;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +17,9 @@ class CrawlingProductPersistenceAdapter implements CrawlingProductStoragePort {
     private final CrawlingProductRepository crawlingProductRepository;
 
     @Override
-    public List<CrawlingProduct> findByRegDateTime(LocalDateTime start, LocalDateTime end) {
-        return crawlingProductRepository.findByRegDateTimeBetween(start, end)
+    public List<CrawlingProduct> findByRegDateTimeAndCategory(LocalDateTime start,
+        LocalDateTime end, Category category) {
+        return crawlingProductRepository.findByRegDateTimeBetweenAndCategory(start, end, category)
             .stream()
             .map(CrawlingProductEntity::toDomain)
             .toList();
