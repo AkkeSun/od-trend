@@ -1,6 +1,9 @@
 package com.odtrend.adapter.out.client.gemini;
 
+import static com.odtrend.infrastructure.exception.ErrorCode.Client_Call_Error;
+
 import com.odtrend.applicaiton.port.out.GeminiClientPort;
+import com.odtrend.infrastructure.exception.CustomBusinessException;
 import java.time.Duration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +38,12 @@ class GeminiClientAdapter implements GeminiClientPort {
 
     @Override
     public float[] embedding(String document) {
-        GeminiEmbeddingResponse result = client.embedding(GeminiEmbeddingRequest.of(document));
-        return result.getResponse();
+        try {
+            GeminiEmbeddingResponse result = client.embedding(GeminiEmbeddingRequest.of(document));
+            return result.getResponse();
+        } catch (Exception e) {
+            log.error("ShopClientAdapter error: {}", e.getMessage());
+            throw new CustomBusinessException(Client_Call_Error);
+        }
     }
 }
