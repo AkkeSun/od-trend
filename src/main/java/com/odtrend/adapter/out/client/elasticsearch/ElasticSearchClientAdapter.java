@@ -40,8 +40,9 @@ class ElasticSearchClientAdapter implements ElasticSearchClientPort {
     }
 
     @Override
-    public List<Long> findIdByEmbedding(float[] embedding) {
-        FindProductEsByEmbeddingRequest request = FindProductEsByEmbeddingRequest.of(embedding);
+    public List<Long> findIdByEmbeddingAndCategory(float[] embedding, String category) {
+        FindProductEsByEmbeddingRequest request = FindProductEsByEmbeddingRequest.of(embedding,
+            category);
         FindProductsEsResponse response = client.findProducts(toJsonString(request));
         return response.isEmpty() ? Collections.emptyList() : response.hits().hits().stream()
             .map(da -> da._source().productId()).toList();

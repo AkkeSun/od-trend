@@ -1,5 +1,8 @@
 package com.odtrend.adapter.out.client.elasticsearch;
 
+import com.odtrend.adapter.out.client.elasticsearch.FindProductEsByEmbeddingRequest.Knn.Filter;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Builder;
 
 @Builder
@@ -10,14 +13,15 @@ record FindProductEsByEmbeddingRequest(
 ) {
 
     static FindProductEsByEmbeddingRequest of(
-        float[] embedding
+        float[] embedding, String category
     ) {
         return FindProductEsByEmbeddingRequest.builder()
-            .size(50)
+            .size(20)
             .knn(Knn.builder()
+                .filter(Filter.of(category))
                 .field("embedding")
                 .query_vector(embedding)
-                .k(50)
+                .k(20)
                 .num_candidates(100)
                 .build())
             .build();
@@ -25,11 +29,26 @@ record FindProductEsByEmbeddingRequest(
 
     @Builder
     record Knn(
+        Filter filter,
         String field,
         float[] query_vector,
         int k,
         int num_candidates
     ) {
 
+        @Builder
+        record Filter(
+            Map<String, String> term
+        ) {
+
+            static Filter of(String category) {
+                Map<String, String> filterItem = new HashMap<>();
+                filterItem.put("category", category);
+
+                return Filter.builder()
+                    .term(filterItem)
+                    .build();
+            }
+        }
     }
 }

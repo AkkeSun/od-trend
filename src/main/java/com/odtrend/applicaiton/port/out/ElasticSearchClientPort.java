@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ElasticSearchClientPort {
 
-    List<Long> findIdByEmbedding(float[] embedding);
+    List<Long> findIdByEmbeddingAndCategory(float[] embedding, String category);
 }
