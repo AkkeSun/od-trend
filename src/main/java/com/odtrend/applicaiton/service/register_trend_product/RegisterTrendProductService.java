@@ -1,10 +1,13 @@
 package com.odtrend.applicaiton.service.register_trend_product;
 
+import static com.odtrend.domain.model.Category.getCategories;
+
 import com.odtrend.applicaiton.port.in.RegisterTrendProductUseCase;
 import com.odtrend.applicaiton.port.out.CrawlingProductStoragePort;
 import com.odtrend.applicaiton.port.out.ElasticSearchClientPort;
 import com.odtrend.applicaiton.port.out.GeminiClientPort;
 import com.odtrend.applicaiton.port.out.RecommendStoragePort;
+import com.odtrend.domain.model.Category;
 import com.odtrend.domain.model.CrawlingProduct;
 import com.odtrend.domain.model.ProductRecommend;
 import java.time.DayOfWeek;
@@ -38,26 +41,39 @@ class RegisterTrendProductService implements RegisterTrendProductUseCase {
             return;
         }
 
-        List<float[]> embeddings = new ArrayList<>();
-        List<CrawlingProduct> products = crawlingProductStoragePort.findByRegDateTime(start, end);
+        for (Category category : getCategories()) {
+            List<CrawlingProduct> products = crawlingProductStoragePort.findByRegDateTimeAndCategory(
+                start, end, category);
 
-        log.info("[registerProduct] {} embedding start - {}", targetDate, products.size());
-        for (CrawlingProduct product : products) {
-            float[] embeddingResult = getEmbeddings(0, product);
-            if (ObjectUtils.isEmpty(embeddingResult)) {
-                // TODO: slack notification
-                break;
+            if (products.isEmpty()) {
+                continue;
             }
-            embeddings.add(embeddingResult);
+
+            log.info("[registerRecommendProduct] {} start - {}", targetDate, products.size());
+            List<float[]> embeddings = new ArrayList<>();
+            for (CrawlingProduct product : products) {
+                float[] embeddingResult = getEmbeddings(0, product);
+                if (ObjectUtils.isEmpty(embeddingResult)) {
+                    // TODO: add error Log
+                    embeddings.clear();
+                    break;
+                }
+                embeddings.add(embeddingResult);
+            }
+
+            if (ObjectUtils.isEmpty(embeddings)) {
+                continue;
+            }
+
+            float[] average = averageEmbeddings(embeddings);
+            List<ProductRecommend> recommends = elasticSearchClientPort.findIdByEmbeddingAndCategory(
+                    average, category.name())
+                .stream()
+                .map(id -> ProductRecommend.of(id, targetDate))
+                .toList();
+
+            recommendStoragePort.register(recommends);
         }
-
-        float[] average = averageEmbeddings(embeddings);
-        List<ProductRecommend> recommends = elasticSearchClientPort.findIdByEmbedding(average)
-            .stream()
-            .map(id -> ProductRecommend.of(id, targetDate))
-            .toList();
-
-        recommendStoragePort.register(recommends);
     }
 
     private float[] getEmbeddings(int retryCnt, CrawlingProduct product) {
