@@ -1,8 +1,10 @@
 package com.odtrend.adapter.out.client.elasticsearch;
 
+import static com.odtrend.infrastructure.exception.ErrorCode.Client_Call_Error;
 import static com.odtrend.infrastructure.util.JsonUtil.toJsonString;
 
 import com.odtrend.applicaiton.port.out.ElasticSearchClientPort;
+import com.odtrend.infrastructure.exception.CustomBusinessException;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
@@ -41,10 +43,15 @@ class ElasticSearchClientAdapter implements ElasticSearchClientPort {
 
     @Override
     public List<Long> findIdByEmbeddingAndCategory(float[] embedding, String category) {
-        FindProductEsByEmbeddingRequest request = FindProductEsByEmbeddingRequest.of(embedding,
-            category);
-        FindProductsEsResponse response = client.findProducts(toJsonString(request));
-        return response.isEmpty() ? Collections.emptyList() : response.hits().hits().stream()
-            .map(da -> da._source().productId()).toList();
+        try {
+            String request = toJsonString(FindProductEsByEmbeddingRequest.of(embedding, category));
+            FindProductsEsResponse response = client.findProducts(request);
+            return response.isEmpty() ? Collections.emptyList() :
+                response.hits().hits().stream().map(da -> da._source().productId()).toList();
+            
+        } catch (Exception e) {
+            log.error("ElasticSearchClientAdapter error: {}", e.getMessage());
+            throw new CustomBusinessException(Client_Call_Error);
+        }
     }
 }
