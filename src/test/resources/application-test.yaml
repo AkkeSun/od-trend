@@ -14,16 +14,16 @@ spring:
     crawling:
       url: jdbc:h2:mem:od-trend;MODE=MySQL
       username: sa
-      password: +
+      password:
       driver-class-name: org.h2.Driver
     recommend:
       shard1:
         url: jdbc:h2:mem:product1;MODE=MySQL
         username: sa
-        password: +
+        password:
         driver-class-name: org.h2.Driver
       shard2:
         url: jdbc:h2:mem:product2;MODE=MySQL
         username: sa
-        password: +
+        password:
         driver-class-name: org.h2.Driver
